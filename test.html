@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>poxlo.com - Luxury Clock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #a18cd1 0%, #fbc2eb 100%);
+            font-family: 'Montserrat', Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo {
+            font-size: 3em;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 6px;
+            text-shadow: 0 4px 24px rgba(80, 37, 143, 0.25), 0 1px 0 #fff;
+            margin-bottom: 0.2em;
+        }
+        .subtitle {
+            font-size: 1.3em;
+            color: #fffbe0;
+            margin-bottom: 1.5em;
+            text-shadow: 0 2px 8px rgba(80, 37, 143, 0.15);
+        }
+        #clock {
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 12px 48px 0 rgba(80, 37, 143, 0.25), 0 1.5px 8px 0 rgba(255,255,255,0.25) inset;
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            border: 2px solid rgba(255,255,255,0.35);
+            padding: 60px 100px;
+            font-size: 3.5em;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 4px 24px rgba(80, 37, 143, 0.25), 0 1px 0 #fff;
+            transition: background 0.5s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #clock::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -40%;
+            width: 180%;
+            height: 180%;
+            background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        #clock span {
+            position: relative;
+            z-index: 1;
+        }
+        .gold-bar {
+            width: 60px;
+            height: 6px;
+            background: linear-gradient(90deg, #ffd700 0%, #fffbe0 100%);
+            border-radius: 3px;
+            margin: 0 auto 24px auto;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+        }
+        @media (max-width: 600px) {
+            #clock {
+                padding: 30px 10px;
+                font-size: 1.5em;
+            }
+            .logo {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">poxlo.com</div>
+    <div class="subtitle">The Luxury Online Clock</div>
+    <div id="clock">
+        <div class="gold-bar"></div>
+        <span>0000-00-00 00:00:00.000</span>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            const ms = String(now.getMilliseconds()).padStart(3, '0');
+            document.querySelector('#clock span').textContent =
+                `${year}-${month}-${day} ${h}:${m}:${s}.${ms}`;
+        }
+        setInterval(updateClock, 10);
+        updateClock();
+    </script>
+</body>
+</html>
